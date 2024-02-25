@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+
+  <script src="index.js"></script>
+
+  <script>
+    function createListItem(ul, palabra) {
+      const li = document.createElement("li");
+      const tt = document.createElement("tt");
+      const textNode = document.createTextNode(palabra);
+      tt.appendChild(textNode);
+      li.appendChild(tt);
+      ul.appendChild(li);
+    }
+
+    function populateList(palabras) {
+      const ul = document.getElementById("list");
+      ul.innerHTML = '';
+      palabras.forEach((palabra) => {
+        createListItem(ul, palabra);
+      });
+    }
+
+    function posiblesPalabras() {
+      const palabra = document.getElementById("main-input").value;
+      const palabras = obtenerPalabrasPosibles(palabra);
+      populateList(palabras);
+    }
+  </script>
+  <body>
+    <input id="main-input" oninput="posiblesPalabras();" />
+
+    <ul id="list"></ul>
+  </body>
+</html>
