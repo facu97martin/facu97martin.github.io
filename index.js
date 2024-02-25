@@ -5049,3 +5049,10 @@ const obtenerPalabrasPosibles = (combinacionLetras) => {
     return a.length - b.length;
   });
 };
+
+const getRandomWord = () => {
+
+  randomIndex = Math.floor(Math.random() * (PALABRAS.length - 1));
+
+  return PALABRAS[randomIndex];
+}

@@ -8,6 +8,16 @@
   <script src="index.js"></script>
 
   <script>
+    const letters = getRandomWord(); //.split("").sort().join("");
+    const palabras = obtenerPalabrasPosibles(letters);
+    const palabrasDescubiertas = [];
+    const cantidadPalabrasPosibles = palabras.length;
+
+    window.onload = () => {
+      document.getElementById("letters").innerHTML = letters;
+      actualizarCantidad();
+    };
+
     function createListItem(ul, palabra) {
       const li = document.createElement("li");
       const tt = document.createElement("tt");
@@ -17,22 +27,34 @@
       ul.appendChild(li);
     }
 
-    function populateList(palabras) {
+    function actualizarPalabrasDescubiertas() {
       const ul = document.getElementById("list");
-      ul.innerHTML = '';
-      palabras.forEach((palabra) => {
+      ul.innerHTML = "";
+      palabrasDescubiertas.forEach((palabra) => {
         createListItem(ul, palabra);
       });
     }
 
-    function posiblesPalabras() {
+    function chequearPalabra() {
       const palabra = document.getElementById("main-input").value;
-      const palabras = obtenerPalabrasPosibles(palabra);
-      populateList(palabras);
+      if (palabras.includes(palabra)) {
+        palabrasDescubiertas.push(palabra);
+      }
+      actualizarPalabrasDescubiertas();
+      actualizarCantidad();
+    }
+
+    function actualizarCantidad() {
+      document.getElementById('cantidad-descubiertas').innerHTML = palabrasDescubiertas.length + "/" + cantidadPalabrasPosibles;
     }
   </script>
   <body>
-    <input id="main-input" oninput="posiblesPalabras();" />
+    <h2 id="letters"></h2>
+
+    <h3 id="cantidad-descubiertas"></h3>
+
+    <input id="main-input" />
+    <input id="main-input-button" type="submit" onclick="chequearPalabra();" />
 
     <ul id="list"></ul>
   </body>
